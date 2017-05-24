@@ -7,6 +7,10 @@
  * @return {Element}
  */
 function createDivWithText(text) {
+    var div = document.createElement('div');
+    div.innerText = text;
+
+    return div;
 }
 
 /**
@@ -16,6 +20,9 @@ function createDivWithText(text) {
  * @return {Element}
  */
 function createAWithHref(hrefValue) {
+    var a = document.createElement('a');
+    a.setAttribute('href', hrefValue);
+    return a;
 }
 
 /**
@@ -25,6 +32,8 @@ function createAWithHref(hrefValue) {
  * @param {Element} where - куда вставлять
  */
 function prepend(what, where) {
+
+    return where.insertBefore(what, where.firstChild);
 }
 
 /**
@@ -42,6 +51,14 @@ function prepend(what, where) {
  * т.к. следующим соседом этих элементов является элемент с тегом P
  */
 function findAllPSiblings(where) {
+    var elem = where.children;
+    var arr = [];
+    for(var i = 0; i < elem.length - 1; i++){
+        if(elem[i].nextSibling.tagName == 'P'){
+            arr.push(elem[i]);
+        }
+    }
+    return arr;
 }
 
 /**
@@ -55,8 +72,8 @@ function findAllPSiblings(where) {
 function findError(where) {
     var result = [];
 
-    for (var i = 0; i < where.childNodes.length; i++) {
-        result.push(where.childNodes[i].innerText);
+    for (var i = 0; i < where.children.length; i++) {
+        result.push(where.children[i].innerText);
     }
 
     return result;
@@ -76,6 +93,13 @@ function findError(where) {
  * должно быть преобразовано в <div></div><p></p>
  */
 function deleteTextNodes(where) {
+    var nodes = where.childNodes;
+
+    for(var i = 0; i < nodes.length; i++){
+        if(nodes[i].nodeType == 3){
+            nodes[i].parentNode.removeChild(nodes[i]);
+        }
+    }
 }
 
 /**
@@ -89,6 +113,17 @@ function deleteTextNodes(where) {
  * должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
 function deleteTextNodesRecursive(where) {
+    var nodes = where.childNodes;
+
+    for(var i = 0; i < nodes.length; i++) {
+
+        if (nodes[i].childNodes.length >= 1) {
+            deleteTextNodesRecursive(nodes[i]);
+        } else {
+            nodes[i].parentNode.removeChild(nodes[i]);
+            i--;
+        }
+    }
 }
 
 /**
