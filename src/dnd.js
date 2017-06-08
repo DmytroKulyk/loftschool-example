@@ -23,6 +23,18 @@ let homeworkContainer = document.querySelector('#homework-container');
  * @return {Element}
  */
 function createDiv() {
+
+    // var divElement = document.createElement('div');
+    //
+    // divElement.className = 'draggable-div';
+    //
+    // divElement.style.height = '100px';
+    // divElement.style.width = '100px';
+    // divElement.style.background = 'red';
+    // divElement.style.position = 'absolute';
+    // divElement.style.left = '100px';
+    // divElement.style.top = '100px';
+
 }
 
 /**
@@ -31,6 +43,10 @@ function createDiv() {
  * @param {Element} target
  */
 function addListeners(target) {
+    // target.addEventListener('mousedown', function(e){
+    //     target.style.top = e.clientY + 'px';
+    //     target.style.left = e.clientX +'px';
+    // })
 }
 
 let addDivButton = homeworkContainer.querySelector('#addDiv');
